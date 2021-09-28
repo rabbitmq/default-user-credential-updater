@@ -5,7 +5,7 @@ go 1.17
 require (
 	github.com/fsnotify/fsnotify v1.5.1
 	github.com/go-logr/logr v1.1.0
-	github.com/michaelklishin/rabbit-hole/v2 v2.10.0
+	github.com/michaelklishin/rabbit-hole/v2 v2.11.0
 	github.com/onsi/ginkgo v1.16.4
 	github.com/onsi/gomega v1.16.0
 	gopkg.in/ini.v1 v1.63.2
