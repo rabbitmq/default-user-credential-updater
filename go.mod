@@ -9,7 +9,7 @@ require (
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.17.0
 	gopkg.in/ini.v1 v1.66.2
-	k8s.io/klog/v2 v2.30.0
+	k8s.io/klog/v2 v2.40.0
 )
 
 require (
