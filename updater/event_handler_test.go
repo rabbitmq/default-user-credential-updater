@@ -8,7 +8,7 @@ import (
 
 	"github.com/fsnotify/fsnotify"
 	rabbithole "github.com/michaelklishin/rabbit-hole/v2"
-	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	. "github.com/rabbitmq/default-user-credential-updater/updater"
 	"gopkg.in/ini.v1"
@@ -191,6 +191,42 @@ var _ = Describe("EventHandler", func() {
 				Consistently(func() string {
 					return read(adminFile, adminFileSection, adminFilePasswordKey)
 				}).Should(Equal("pwd1"))
+			})
+		})
+	})
+
+	When("updated password in default user file contains #", func() {
+		JustBeforeEach(func() {
+			write(defaultUserFile, defaultFileSection, defaultFilePasswordKey, "pwd#2")
+		})
+		When("password in RabbitMQ is not yet up-to-date", func() {
+			BeforeEach(func() {
+				fakeClient.getUserReturn = getUserReturn{
+					userInfo: &rabbithole.UserInfo{
+						HashingAlgorithm: "myalgo",
+						Tags:             rabbithole.UserTags{"mytag"},
+					}}
+				fakeClient.putUserReturn = putUserReturn{
+					resp: &http.Response{
+						Status: "204 No Content",
+					}}
+			})
+			It("updates password in RabbitMQ", func() {
+				Eventually(func() string {
+					return fakeClient.getUserArg
+				}).Should(Equal("myuser"))
+				expectedUserSettings := rabbithole.UserSettings{
+					Name:             "myuser",
+					Tags:             rabbithole.UserTags{"mytag"},
+					Password:         "pwd#2",
+					HashingAlgorithm: "myalgo",
+				}
+				Expect(fakeClient.putUserArg).To(Equal(putUserArg{"myuser", expectedUserSettings}))
+			})
+			It("copies new password to admin conf", func() {
+				Eventually(func() string {
+					return read(adminFile, adminFileSection, adminFilePasswordKey)
+				}).Should(Equal("pwd#2"))
 			})
 		})
 	})
