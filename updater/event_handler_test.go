@@ -8,7 +8,7 @@ import (
 
 	"github.com/fsnotify/fsnotify"
 	rabbithole "github.com/michaelklishin/rabbit-hole/v2"
-	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	. "github.com/rabbitmq/default-user-credential-updater/updater"
 	"gopkg.in/ini.v1"
