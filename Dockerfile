@@ -1,4 +1,6 @@
-FROM golang:1.24 AS builder
+ARG GO_TAG=1.25
+ARG DOCKER_REGISTRY=docker.io
+FROM --platform=$BUILDPLATFORM ${DOCKER_REGISTRY}/library/golang:${GO_TAG} AS builder
 
 WORKDIR /go/src/app
 ADD . /go/src/app

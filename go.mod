@@ -1,8 +1,6 @@
 module github.com/rabbitmq/default-user-credential-updater
 
-go 1.24.0
-
-toolchain go1.24.3
+go 1.25.4
 
 require (
 	github.com/fsnotify/fsnotify v1.9.0
@@ -21,7 +19,7 @@ require (
 	github.com/kr/pretty v0.2.1 // indirect
 	go.uber.org/automaxprocs v1.6.0 // indirect
 	golang.org/x/net v0.38.0 // indirect
-	golang.org/x/sys v0.33.0 // indirect
+	golang.org/x/sys v0.38.0 // indirect
 	golang.org/x/text v0.23.0 // indirect
 	golang.org/x/tools v0.31.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
