@@ -41,6 +41,7 @@ jobs:
     - uses: actions/checkout@v6
 
     - name: Setup Go
+      id: set-go
       uses: actions/setup-go@v6
       with:
         go-version-file: go.mod
