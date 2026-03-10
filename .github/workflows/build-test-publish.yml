@@ -87,7 +87,7 @@ jobs:
 
     # We want to always build the image, and push to registry only on new tag i.e. new release
     - name: Build and push
-      uses: docker/build-push-action@v6
+      uses: docker/build-push-action@v7
       with:
         context: .
         platforms: linux/amd64, linux/arm64, linux/ppc64le, linux/s390x
