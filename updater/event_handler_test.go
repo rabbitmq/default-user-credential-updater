@@ -12,7 +12,7 @@ import (
 	. "github.com/onsi/gomega"
 	. "github.com/rabbitmq/default-user-credential-updater/updater"
 	"gopkg.in/ini.v1"
-	"k8s.io/klog/v2/klogr"
+	"k8s.io/klog/v2/textlogger"
 )
 
 const (
@@ -43,7 +43,7 @@ var _ = Describe("EventHandler", func() {
 		// Remove trailing new line
 		ini.PrettySection = false
 		initConfigFiles()
-		log := klogr.New()
+		log := textlogger.NewLogger(textlogger.NewConfig())
 		fakeClient = &fakeRabbitClient{}
 		watcher, err := fsnotify.NewWatcher()
 		Expect(err).ToNot(HaveOccurred())
@@ -62,7 +62,7 @@ var _ = Describe("EventHandler", func() {
 	})
 
 	AfterEach(func() {
-		u.Watcher.Close()
+		Expect(u.Watcher.Close()).To(Succeed())
 		initConfigFiles()
 	})
 
