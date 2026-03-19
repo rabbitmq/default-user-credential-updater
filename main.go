@@ -4,7 +4,6 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"flag"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"os/signal"
@@ -13,7 +12,7 @@ import (
 	"syscall"
 
 	"k8s.io/klog/v2"
-	"k8s.io/klog/v2/klogr"
+	"k8s.io/klog/v2/textlogger"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/go-logr/logr"
@@ -50,7 +49,7 @@ func main() {
 		"This file contains the trusted certificate for RabbitMQ server authentication.")
 	klog.InitFlags(nil)
 	flag.Parse()
-	log := klogr.New().WithName("password-updater")
+	log := textlogger.NewLogger(textlogger.NewConfig()).WithName("password-updater")
 	u.Log = log
 
 	rabbitClient, err := newRabbitClient(log, managementURI, caFile)
@@ -70,7 +69,11 @@ func main() {
 		log.Error(err, "failed to create watcher")
 		return
 	}
-	defer watcher.Close()
+	defer func() {
+		if err := watcher.Close(); err != nil {
+			log.Error(err, "failed to close watcher")
+		}
+	}()
 	u.Watcher = watcher
 
 	// Remove trailing new line (.rabbitmqadmin.conf has only one section).
@@ -103,7 +106,7 @@ func main() {
 
 func newRabbitClient(log logr.Logger, managementURI, caFile string) (updater.RabbitClient, error) {
 	if strings.HasPrefix(managementURI, "https") {
-		caCert, err := ioutil.ReadFile(caFile)
+		caCert, err := os.ReadFile(caFile)
 		if err != nil {
 			log.Error(err, "failed to read CA file", "file", caFile)
 			return nil, err
