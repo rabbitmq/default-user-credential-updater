@@ -1,4 +1,4 @@
-ARG GO_TAG=1.25
+ARG GO_TAG=1.26
 ARG DOCKER_REGISTRY=docker.io
 FROM --platform=$BUILDPLATFORM ${DOCKER_REGISTRY}/library/golang:${GO_TAG} AS builder
 
