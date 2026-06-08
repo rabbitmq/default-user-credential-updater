@@ -1,6 +1,6 @@
 module github.com/rabbitmq/default-user-credential-updater
 
-go 1.26.3
+go 1.26.4
 
 require (
 	github.com/fsnotify/fsnotify v1.10.1
@@ -8,7 +8,7 @@ require (
 	github.com/michaelklishin/rabbit-hole/v3 v3.5.0
 	github.com/onsi/ginkgo/v2 v2.29.0
 	github.com/onsi/gomega v1.41.0
-	gopkg.in/ini.v1 v1.67.2
+	gopkg.in/ini.v1 v1.67.3
 	k8s.io/klog/v2 v2.140.0
 )
 
@@ -21,7 +21,7 @@ require (
 	golang.org/x/mod v0.35.0 // indirect
 	golang.org/x/net v0.53.0 // indirect
 	golang.org/x/sync v0.20.0 // indirect
-	golang.org/x/sys v0.43.0 // indirect
+	golang.org/x/sys v0.46.0 // indirect
 	golang.org/x/text v0.36.0 // indirect
 	golang.org/x/tools v0.44.0 // indirect
 )
