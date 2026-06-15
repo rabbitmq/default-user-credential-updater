@@ -6,8 +6,8 @@ require (
 	github.com/fsnotify/fsnotify v1.10.1
 	github.com/go-logr/logr v1.4.3
 	github.com/michaelklishin/rabbit-hole/v3 v3.5.0
-	github.com/onsi/ginkgo/v2 v2.30.0
-	github.com/onsi/gomega v1.41.0
+	github.com/onsi/ginkgo/v2 v2.31.0
+	github.com/onsi/gomega v1.42.0
 	gopkg.in/ini.v1 v1.67.3
 	k8s.io/klog/v2 v2.140.0
 )
