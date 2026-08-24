@@ -1,6 +1,6 @@
 module github.com/rabbitmq/default-user-credential-updater
 
-go 1.26.6
+go 1.26.7
 
 require (
 	github.com/fsnotify/fsnotify v1.10.1
