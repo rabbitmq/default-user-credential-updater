@@ -8,7 +8,7 @@ require (
 	github.com/michaelklishin/rabbit-hole/v3 v3.6.0
 	github.com/onsi/ginkgo/v2 v2.34.0
 	github.com/onsi/gomega v1.44.0
-	gopkg.in/ini.v1 v1.67.3
+	gopkg.in/ini.v1 v1.68.0
 	k8s.io/klog/v2 v2.140.0
 )
 
